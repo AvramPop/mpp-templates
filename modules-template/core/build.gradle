@@ -14,7 +14,7 @@ dependencies {
     compile group: 'org.apache.commons', name: 'commons-dbcp2', version: "$dbcpVersion"
 
 
-    compile group: 'com.github.ben-manes.caffeine', name: 'caffeine', version: "$caffeineVersion"
+//    compile group: 'com.github.ben-manes.caffeine', name: 'caffeine', version: "$caffeineVersion"
     compile group: 'com.zaxxer', name: 'HikariCP', version: "$hikariVersion"
 
     compile group: 'javax.xml.bind', name: 'jaxb-api', version: "$jaxbapiVersion"}

@@ -12,8 +12,9 @@ import javax.persistence.Id;
 @Setter
 @EqualsAndHashCode
 @ToString
+@Builder
 public class Student {
   @Id
-  private int id;
+  private Integer id;
   private String name;
 }

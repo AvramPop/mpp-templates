@@ -14,6 +14,6 @@ import javax.persistence.Id;
 @ToString
 public class Discipline {
   @Id
-  private int id;
+  private Integer id;
   private String description;
 }
