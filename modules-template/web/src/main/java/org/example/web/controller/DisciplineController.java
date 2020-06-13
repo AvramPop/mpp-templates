@@ -23,7 +23,7 @@ public class DisciplineController {
   @Autowired private DisciplineConverter disciplineConverter;
 
 
-  @RequestMapping(value = "/discipline/all", method = RequestMethod.GET)
+  @RequestMapping(value = "/disciplines/all", method = RequestMethod.GET)
   public DisciplinesDto getDisciplines() {
     logger.trace("getDisciplines -- method entered");
     List<Discipline> disciplines = disciplineService.findAll();
@@ -31,7 +31,7 @@ public class DisciplineController {
     return new DisciplinesDto(disciplineConverter.convertModelsToDtos(disciplines));
   }
 
-  @RequestMapping(value = "/discipline/add", method = RequestMethod.POST)
+  @RequestMapping(value = "/disciplines/add", method = RequestMethod.POST)
   public ResponseDto addDiscipline(@RequestBody DisciplineDto disciplineDto) {
     logger.trace("addDiscipline -- method entered. Data: {}", disciplineDto.toString());
     if(disciplineService.saveDiscipline(disciplineDto.getId(), disciplineDto.getDescription())) {
@@ -43,7 +43,7 @@ public class DisciplineController {
     }
   }
 
-  @RequestMapping(value = "/discipline/up", method = RequestMethod.PUT)
+  @RequestMapping(value = "/disciplines/up", method = RequestMethod.PUT)
   public ResponseDto updateDiscipline(@RequestBody DisciplineDto disciplineDto) {
     logger.trace("updateDiscipline -- method entered. Data: {}", disciplineDto.toString());
     if(disciplineService.updateDiscipline(disciplineDto.getId(), disciplineDto.getDescription())) {
@@ -55,7 +55,7 @@ public class DisciplineController {
     }
   }
 
-  @RequestMapping(value = "/discipline/delete/{id}", method = RequestMethod.DELETE)
+  @RequestMapping(value = "/disciplines/delete/{id}", method = RequestMethod.DELETE)
   public ResponseDto deleteDiscipline(@PathVariable Integer id) {
     logger.trace("deleteDiscipline -- method entered. Id: {}", id);
     if(disciplineService.deleteDiscipline(id)) {

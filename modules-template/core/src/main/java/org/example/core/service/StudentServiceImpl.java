@@ -88,4 +88,12 @@ public class StudentServiceImpl implements StudentService {
     studentRepository.deleteById(id);
     return true;
   }
+
+  @Override
+  public List<Student> findStudentsByName(String name){
+    logger.trace("findStudentsByName -- method entered. Name: {}", name);
+    List<Student> students = studentRepository.findAllByName(name);
+    logger.trace("findStudentsByName: result = {}", students);
+    return students;
+  }
 }

@@ -21,7 +21,7 @@ public class StudentController {
 
   @Autowired private StudentConverter studentConverter;
 
-  @RequestMapping(value = "/student/all", method = RequestMethod.GET)
+  @RequestMapping(value = "/students/all", method = RequestMethod.GET)
   public StudentsDto getStudents() {
     logger.trace("getStudents -- method entered");
     List<Student> students = studentService.findAll();
@@ -29,7 +29,15 @@ public class StudentController {
     return new StudentsDto(studentConverter.convertModelsToDtos(students));
   }
 
-  @RequestMapping(value = "/student/add", method = RequestMethod.POST)
+  @RequestMapping(value = "/students/filtered/{name}", method = RequestMethod.GET)
+  public StudentsDto getStudentsFiltered(@PathVariable String name) {
+    logger.trace("getStudentsFiltered -- method entered. Data: {}", name);
+    List<Student> students = studentService.findStudentsByName(name);
+    logger.trace("getStudentsFiltered: students={}", students);
+    return new StudentsDto(studentConverter.convertModelsToDtos(students));
+  }
+
+  @RequestMapping(value = "/students/add", method = RequestMethod.POST)
   public ResponseDto addStudent(@RequestBody StudentDto studentDto) {
     logger.trace("addStudent -- method entered. Data: {}", studentDto.toString());
     if(studentService.saveStudent(studentDto.getId(), studentDto.getName())) {
@@ -41,7 +49,7 @@ public class StudentController {
     }
   }
 
-  @RequestMapping(value = "/student/up", method = RequestMethod.PUT)
+  @RequestMapping(value = "/students/up", method = RequestMethod.PUT)
   public ResponseDto updateStudent(@RequestBody StudentDto studentDto) {
     logger.trace("updateStudent -- method entered. Data: {}", studentDto.toString());
     if(studentService.updateStudent(studentDto.getId(), studentDto.getName())) {
@@ -53,7 +61,7 @@ public class StudentController {
     }
   }
 
-  @RequestMapping(value = "/student/delete/{id}", method = RequestMethod.DELETE)
+  @RequestMapping(value = "/students/delete/{id}", method = RequestMethod.DELETE)
   public ResponseDto deleteStudent(@PathVariable Integer id) {
     logger.trace("deleteStudent -- method entered. Id: {}", id);
     if(studentService.deleteStudent(id)) {
