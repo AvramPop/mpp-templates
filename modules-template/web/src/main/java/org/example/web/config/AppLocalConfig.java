@@ -1,7 +1,6 @@
 package org.example.web.config;
 
 import org.example.core.config.JPAConfig;
-import org.example.web.Tester;
 import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
@@ -14,10 +13,5 @@ public class AppLocalConfig {
   @Bean
   public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
     return new PropertySourcesPlaceholderConfigurer();
-  }
-
-  @Bean
-  public static Tester tester() {
-    return new Tester();
   }
 }

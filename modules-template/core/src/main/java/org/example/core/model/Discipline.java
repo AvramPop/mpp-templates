@@ -12,6 +12,7 @@ import javax.persistence.Id;
 @Setter
 @EqualsAndHashCode
 @ToString
+@Builder
 public class Discipline {
   @Id
   private Integer id;
