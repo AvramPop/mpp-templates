@@ -1,0 +1,5 @@
+rootProject.name = 'exam921'
+include 'monitor-core'
+include 'monitor-web'
+include 'sensor-app'
+include 'server-app'

@@ -1,0 +1,197 @@
+/**
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+import { Directionality } from '@angular/cdk/bidi';
+import { Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { ComponentType } from '@angular/cdk/portal';
+import { AfterViewInit, ElementRef, EventEmitter, NgZone, OnDestroy, ViewContainerRef } from '@angular/core';
+import { CanColor, CanColorCtor, ThemePalette } from '@angular/material/core';
+import { MatCalendarCellCssClasses } from '@angular/material/datepicker';
+import { MatDialog } from '@angular/material/dialog';
+import { NgxMatDateAdapter } from './core/date-adapter';
+import { Subject } from 'rxjs';
+import { NgxMatCalendar } from './calendar';
+import { NgxMatDatetimeInput } from './datetime-input';
+import { NgxMatTimepickerComponent } from './timepicker.component';
+/** @docs-private */
+declare class MatDatepickerContentBase {
+    _elementRef: ElementRef;
+    constructor(_elementRef: ElementRef);
+}
+declare const _MatDatepickerContentMixinBase: CanColorCtor & typeof MatDatepickerContentBase;
+/**
+ * Component used as the content for the datepicker dialog and popup. We use this instead of using
+ * NgxMatCalendar directly as the content so we can control the initial focus. This also gives us a
+ * place to put additional features of the popup that are not part of the calendar itself in the
+ * future. (e.g. confirmation buttons).
+ * @docs-private
+ */
+export declare class NgxMatDatetimeContent<D> extends _MatDatepickerContentMixinBase implements AfterViewInit, CanColor {
+    /** Reference to the internal calendar component. */
+    _calendar: NgxMatCalendar<D>;
+    /** Reference to the internal time picker component. */
+    _timePicker: NgxMatTimepickerComponent<D>;
+    /** Reference to the datepicker that created the overlay. */
+    datepicker: NgxMatDatetimePicker<D>;
+    /** Whether the datepicker is above or below the input. */
+    _isAbove: boolean;
+    /** Whether or not the selected date is valid (min,max...) */
+    readonly valid: boolean;
+    readonly isViewMonth: boolean;
+    constructor(elementRef: ElementRef);
+    ngAfterViewInit(): void;
+}
+/** Component responsible for managing the datepicker popup/dialog. */
+export declare class NgxMatDatetimePicker<D> implements OnDestroy, CanColor {
+    private _dialog;
+    private _overlay;
+    private _ngZone;
+    private _viewContainerRef;
+    private _dateAdapter;
+    private _dir;
+    private _document;
+    private _scrollStrategy;
+    /** An input indicating the type of the custom header component for the calendar, if set. */
+    calendarHeaderComponent: ComponentType<any>;
+    /** The date to open the calendar to initially. */
+    startAt: D | null;
+    private _startAt;
+    /** The view that the calendar should start in. */
+    startView: 'month' | 'year' | 'multi-year';
+    /** Color palette to use on the datepicker's calendar. */
+    color: ThemePalette;
+    _color: ThemePalette;
+    /**
+     * Whether the calendar UI is in touch mode. In touch mode the calendar opens in a dialog rather
+     * than a popup and elements have more padding to allow for bigger touch targets.
+     */
+    touchUi: boolean;
+    private _touchUi;
+    hideTime: boolean;
+    _hideTime: boolean;
+    /** Whether the datepicker pop-up should be disabled. */
+    disabled: boolean;
+    _disabled: boolean;
+    /**
+     * Emits selected year in multiyear view.
+     * This doesn't imply a change on the selected date.
+     */
+    readonly yearSelected: EventEmitter<D>;
+    /**
+     * Emits selected month in year view.
+     * This doesn't imply a change on the selected date.
+     */
+    readonly monthSelected: EventEmitter<D>;
+    /** Classes to be passed to the date picker panel. Supports the same syntax as `ngClass`. */
+    panelClass: string | string[];
+    /** Function that can be used to add custom CSS classes to dates. */
+    dateClass: (date: D) => MatCalendarCellCssClasses;
+    /** Emits when the datepicker has been opened. */
+    openedStream: EventEmitter<void>;
+    /** Emits when the datepicker has been closed. */
+    closedStream: EventEmitter<void>;
+    /** Whether the calendar is open. */
+    opened: boolean;
+    private _opened;
+    /** Whether the timepicker'spinners is shown. */
+    showSpinners: boolean;
+    _showSpinners: boolean;
+    /** Whether the second part is disabled. */
+    showSeconds: boolean;
+    _showSeconds: boolean;
+    /** Step hour */
+    stepHour: number;
+    _stepHour: number;
+    /** Step minute */
+    stepMinute: number;
+    _stepMinute: number;
+    /** Step second */
+    stepSecond: number;
+    _stepSecond: number;
+    /** Enable meridian */
+    enableMeridian: boolean;
+    _enableMeridian: boolean;
+    /** disable minute */
+    disableMinute: boolean;
+    _disableMinute: boolean;
+    /** Step second */
+    defaultTime: number[];
+    _defaultTime: number[];
+    private _hasBackdrop;
+    /** The id for the datepicker calendar. */
+    id: string;
+    /** The currently selected date. */
+    _selected: D | null;
+    private _validSelected;
+    /** The minimum selectable date. */
+    readonly _minDate: D | null;
+    /** The maximum selectable date. */
+    readonly _maxDate: D | null;
+    readonly valid: boolean;
+    readonly _dateFilter: (date: D | null) => boolean;
+    /** A reference to the overlay when the calendar is opened as a popup. */
+    _popupRef: OverlayRef;
+    /** A reference to the dialog when the calendar is opened as a dialog. */
+    private _dialogRef;
+    /** A portal containing the calendar for this datepicker. */
+    private _calendarPortal;
+    /** Reference to the component instantiated in popup mode. */
+    private _popupComponentRef;
+    /** The element that was focused before the datepicker was opened. */
+    private _focusedElementBeforeOpen;
+    /** Subscription to value changes in the associated input element. */
+    private _inputSubscription;
+    /** The input element this datepicker is associated with. */
+    _datepickerInput: NgxMatDatetimeInput<D>;
+    /** Emits when the datepicker is disabled. */
+    readonly _disabledChange: Subject<boolean>;
+    /** Emits new selected date when selected date changes. */
+    readonly _selectedChanged: Subject<D>;
+    /** Raw value before  */
+    private _rawValue;
+    constructor(_dialog: MatDialog, _overlay: Overlay, _ngZone: NgZone, _viewContainerRef: ViewContainerRef, scrollStrategy: any, _dateAdapter: NgxMatDateAdapter<D>, _dir: Directionality, _document: any);
+    ngOnDestroy(): void;
+    /** The form control validator for the min date. */
+    private _minValidator;
+    /** The form control validator for the max date. */
+    private _maxValidator;
+    /** Selects the given date */
+    select(date: D): void;
+    /** Emits the selected year in multiyear view */
+    _selectYear(normalizedYear: D): void;
+    /** Emits selected month in year view */
+    _selectMonth(normalizedMonth: D): void;
+    /** OK button handler and close*/
+    ok(): void;
+    /** Cancel and close */
+    cancel(): void;
+    /**
+     * Register an input with this datepicker.
+     * @param input The datepicker input to register with this datepicker.
+     */
+    _registerInput(input: NgxMatDatetimeInput<D>): void;
+    /** Open the calendar. */
+    open(): void;
+    /** Close the calendar. */
+    close(): void;
+    /** Open the calendar as a dialog. */
+    private _openAsDialog;
+    /** Open the calendar as a popup. */
+    private _openAsPopup;
+    /** Create the popup. */
+    private _createPopup;
+    /** Create the popup PositionStrategy. */
+    private _createPopupPositionStrategy;
+    /**
+     * @param obj The object to check.
+     * @returns The given object if it is both a date instance and valid, otherwise null.
+     */
+    private _getValidDateOrNull;
+    /** Passes the current theme color along to the calendar overlay. */
+    private _setColor;
+}
+export {};

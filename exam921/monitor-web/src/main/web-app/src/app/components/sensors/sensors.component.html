@@ -1,0 +1,23 @@
+<div class="main-div">
+  <mat-card>
+    <ul>
+      <li *ngFor="let name of names"> {{name}} </li>
+    </ul>
+
+    <button (click)="show()" color="primary" class="redirect-button" mat-raised-button>
+      Show
+    </button>
+    <br>
+
+    <ul *ngIf="showFlag">
+      <li *ngFor="let sensor of sensors">
+        Sensor name: {{sensor.name}}
+        <button (click)="someMethod(sensor.name)" color="primary" class="redirect-button" mat-raised-button>
+          Stop
+        </button> <br>
+        {{toString(sensorData.get(sensor.id))}}
+      </li>
+    </ul>
+  </mat-card>
+
+</div>
