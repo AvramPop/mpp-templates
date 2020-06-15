@@ -13,10 +13,6 @@ import javax.persistence.*;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = true)
-@NamedEntityGraphs({
-    @NamedEntityGraph(name = "booksWithAuthor",
-        attributeNodes = @NamedAttributeNode(value = "author")),
-})
 public class Book extends BaseEntity<Integer> {
   private String name;
 
