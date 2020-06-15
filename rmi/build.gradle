@@ -1,0 +1,75 @@
+allprojects {
+
+    group 'org.example'
+    version '1.0-SNAPSHOT'
+    apply plugin: 'java'
+    sourceCompatibility = JavaVersion.VERSION_11
+
+    ext {
+        springVersion = '5.0.3.RELEASE'
+        postgresqlVersion = '42.2.1'
+        dbcpVersion = '2.2.0'
+
+        slf4jVersion = '1.7.25'
+        log4jVersion = '2.10.0'
+
+        springDataVersion = '2.0.3.RELEASE'
+        hibernateVersion = '5.2.6.Final'
+        caffeineVersion = '2.6.1'
+        hikariVersion = '2.7.7'
+        jaxbapiVersion = '2.3.0'
+
+        javaxValidationVersion = '2.0.0.Final'
+        hibernateValidatorVersion = '6.0.6.Final'
+        javaxElApiVersion = '3.0.1-b04'
+        glassfishJavaxElVersion = '3.0.1-b08'
+
+        lombokVersion = '1.18.12'
+
+        jacksonDatabindVersion = '2.9.4'
+        javaxServeletApiVersion = '4.0.1'
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        //spring
+        compile group: 'org.springframework', name: 'spring-context', version: "$springVersion"
+
+        //logging
+        compile group: 'org.slf4j', name: 'slf4j-api', version: "$slf4jVersion"
+        testCompile group: 'org.slf4j', name: 'slf4j-simple', version: "$slf4jVersion"
+
+        compile group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: "$log4jVersion"
+        compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: "$log4jVersion"
+        compile group: 'org.apache.logging.log4j', name: 'log4j-1.2-api', version: "$log4jVersion"
+
+        //lombok
+        compile group:'org.projectlombok', name:'lombok', version:"$lombokVersion"
+        compileOnly "org.projectlombok:lombok:$lombokVersion"
+        annotationProcessor "org.projectlombok:lombok:$lombokVersion"
+
+
+        //persistence
+        compile group: 'org.springframework', name: 'spring-context-support', version: "$springVersion"
+        compile group: 'org.springframework', name: 'spring-orm', version: "$springVersion"
+        compile(group: 'org.springframework.data', name: 'spring-data-jpa', version: "$springDataVersion")
+
+        compile group: 'org.hibernate', name: 'hibernate-core', version: "$hibernateVersion"
+
+        compile group: 'org.postgresql', name: 'postgresql', version: "$postgresqlVersion"
+//    compile group: 'postgresql', name: 'postgresql', version: "$jdbcpostgreSqlVersion"
+
+        compile group: 'org.springframework', name: 'spring-jdbc', version: "$springVersion"
+//    compile group: 'org.postgresql', name: 'postgresql', version: "$postgresqlVersion"
+        compile group: 'org.apache.commons', name: 'commons-dbcp2', version: "$dbcpVersion"
+
+
+//    compile group: 'com.github.ben-manes.caffeine', name: 'caffeine', version: "$caffeineVersion"
+        compile group: 'com.zaxxer', name: 'HikariCP', version: "$hikariVersion"
+
+        compile group: 'javax.xml.bind', name: 'jaxb-api', version: "$jaxbapiVersion"
+    }
+}

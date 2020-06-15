@@ -1,2 +1,4 @@
 rootProject.name = 'rest-console'
-
+include 'core'
+include 'web'
+include 'client'
