@@ -1,0 +1,4 @@
+rootProject.name = 'persistence'
+
+include 'core'
+include 'web'
