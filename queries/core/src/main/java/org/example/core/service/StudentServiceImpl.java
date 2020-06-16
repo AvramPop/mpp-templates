@@ -96,4 +96,9 @@ public class StudentServiceImpl implements StudentService {
     return studentRepository.findByNameLikeCustom(name);
   }
 
+  @Override
+  public List<Object[]> findAllNamesAndIds(){
+    return studentRepository.findAllNamesAndIds();
+  }
+
 }

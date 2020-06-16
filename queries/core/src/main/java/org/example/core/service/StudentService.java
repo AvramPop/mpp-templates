@@ -9,4 +9,5 @@ public interface StudentService {
   boolean saveStudent(Integer id, String name);
   boolean deleteStudent(Integer id);
   List<Student> findByNameLikeCustom(String name);
+  List<Object[]> findAllNamesAndIds();
 }

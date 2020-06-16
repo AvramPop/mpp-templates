@@ -11,8 +11,8 @@ public class CodeDriver {
   @Autowired
   private StudentService studentService;
   public void run() {
-    studentService.findAll().forEach(student -> log.info(student.getName()));
-    log.info("----------------");
-    studentService.findByNameLikeCustom("rest").forEach(student -> log.info(student.getName()));
+    System.out.println(studentService.findAllNamesAndIds().size());
+    System.out.println(studentService.findAllNamesAndIds().get(0).length);
+//    studentService.findAllNamesAndIds().forEach(objects -> log.info(objects[0].toString() + " " + objects[1].toString()));
   }
 }
