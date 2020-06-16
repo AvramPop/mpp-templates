@@ -1,4 +1,4 @@
-package org.example.old.model;
+package org.example.old.repo;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -17,6 +17,7 @@ public abstract class DBRepository {
   private String dbName;
   private String dbUser;
   private String dbPassword;
+
   public DBRepository(String dbCredentialsFilename) {
     loadDBConfiguration(dbCredentialsFilename);
   }
@@ -51,18 +52,18 @@ public abstract class DBRepository {
     DriverManager.setLoginTimeout(60);
     try {
       String url =
-          "jdbc:" +
-              this.dbType +
-              "://" +
-              this.dbHost +
-              ":" +
-              this.dbPort +
-              "/" +
-              dbName +
-              "?user=" +
-              this.dbUser +
-              "&password=" +
-              this.dbPassword;
+          "jdbc:"
+              + this.dbType
+              + "://"
+              + this.dbHost
+              + ":"
+              + this.dbPort
+              + "/"
+              + dbName
+              + "?user="
+              + this.dbUser
+              + "&password="
+              + this.dbPassword;
       return DriverManager.getConnection(url);
     } catch (SQLException e) {
       System.err.println("Cannot connect to the database: " + e.getMessage());
