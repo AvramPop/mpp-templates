@@ -9,9 +9,9 @@
         </processorPath>
         <module name="exam921.sensor-app.main" />
         <module name="exam921.main" />
-        <module name="exam921.monitor-core.main" />
-        <module name="exam921.server-app.main" />
         <module name="exam921.monitor-web.main" />
+        <module name="exam921.server-app.main" />
+        <module name="exam921.monitor-core.main" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="11" />
