@@ -54,6 +54,7 @@ public class StudentServiceImpl implements StudentService {
   }
 
   @Override
+  @Transactional
   public boolean saveStudent(Integer id, String name) {
     logger.trace("saveStudent -- method entered. Params: id = {}, name = {}", id, name);
     if (studentRepository.existsById(id)) {
@@ -75,6 +76,7 @@ public class StudentServiceImpl implements StudentService {
   }
 
   @Override
+  @Transactional
   public boolean deleteStudent(Integer id) {
     logger.trace("deleteStudent -- method entered. Params: id = {}", id);
     if (id == null || id < 0) {

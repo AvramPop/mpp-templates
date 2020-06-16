@@ -51,6 +51,7 @@ public class DisciplineServiceImpl implements DisciplineService {
   }
 
   @Override
+  @Transactional
   public boolean saveDiscipline(Integer id, String description) {
     logger.trace(
         "saveDiscipline -- method entered. Params: id = {}, description = {}", id, description);
@@ -71,6 +72,7 @@ public class DisciplineServiceImpl implements DisciplineService {
   }
 
   @Override
+  @Transactional
   public boolean deleteDiscipline(Integer id) {
     logger.trace(
         "deleteDiscipline -- method entered. Params: id = {}", id);

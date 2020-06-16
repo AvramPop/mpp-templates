@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Transactional
 public interface StudentRepository extends JpaRepository<Student, Integer> {
   List<Student> findAllByName(String name);
 }
